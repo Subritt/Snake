@@ -1,16 +1,19 @@
-window.onload = function() {
-    let canv = document.querySelector(".gc");
-    let ctx = canv.getContext("2D");
-    document.addEventListener("keydown", keyPush);
-    setInterval(game, 1000/15);
-}
-
+const canv = document.querySelector("#gc");
+const ctx = canv.getContext("2d");
+const score = document.querySelector("#score");
 let px=py=10;
 let gs=tc=20;
 let ax=ay=15;
 let xv=yv=0;
 let trail = [];
 let tail = 5;
+
+window.onload = function() {
+    document.addEventListener("keydown", keyPush);
+    score.textContent = tail-5;
+    setInterval(game, 1000/15);
+}
+
 
 function game() {
     px += xv;
@@ -29,17 +32,21 @@ function game() {
         py = 0;
     }
 
+    // Canvas
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canv.width, canv.height);
 
+    // Apple
     ctx.fillStyle = "red";
     ctx.fillRect(ax*gs, ay*gs, gs-2, gs-2);
 
+    // Snake
     ctx.fillStyle = "lime";
     trail.forEach(el => {
         ctx.fillRect(el.x*gs, el.y*gs, gs-2, gs-2);
         if (el.x === px && el.y === py) {
             tail = 5;
+            score.textContent = tail-5;
         }
     });
     trail.push({x: px, y: py});
@@ -50,6 +57,7 @@ function game() {
 
     if (ax === px && ay === py) {
         tail++;
+        score.textContent = tail-5;
         ax = Math.floor(Math.random() * tc);
         ay = Math.floor(Math.random() * tc);
     }

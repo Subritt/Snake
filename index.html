@@ -4,9 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake</title>
+    <style>
+        .container {
+            position: relative;
+        }
+    </style>
 </head>
 <body>
-    <canvas class="gc" height=400></canvas>
-    <script src="logic.js"></script>
+    <div class="container">
+        <div><h1>Score: <span id="score"></span></h1></div>
+        <canvas id="gc" width="400" height="400"></canvas>
+        <script src="logic.js"></script>
+    </div>
 </body>
 </html>
