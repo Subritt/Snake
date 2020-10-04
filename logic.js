@@ -9,8 +9,8 @@ let trail = [];
 let tail = 5;
 
 window.onload = function() {
+    score.textContent = 0;
     document.addEventListener("keydown", keyPush);
-    score.textContent = tail-5;
     setInterval(game, 1000/15);
 }
 
@@ -45,10 +45,23 @@ function game() {
     trail.forEach(el => {
         ctx.fillRect(el.x*gs, el.y*gs, gs-2, gs-2);
         if (el.x === px && el.y === py) {
+
+            if (trail.length > 1) {
+                score.textContent = tail-5;
+                alert(`GAME OVER! \n SCORE: ${tail-5}`);
+                score.textContent = 0;
+            }
+            
+            px=py=10;
+            gs=tc=20;
+            ax=ay=15;
+            xv=yv=0;
+            trail = [];
             tail = 5;
-            score.textContent = tail-5;
+            
         }
     });
+
     trail.push({x: px, y: py});
     
     while (trail.length > tail) {
